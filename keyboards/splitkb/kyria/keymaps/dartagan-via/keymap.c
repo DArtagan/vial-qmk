@@ -36,11 +36,11 @@ enum layers { _BASE = 0, _NAV, _SYM, _FUNCTION, _GAME };
 // Holding both Tab and Backspace keys toggles the Game layer
 const uint16_t PROGMEM fkeys_sym_combo[] = {FKEYS, SYM, COMBO_END};
 const uint16_t PROGMEM tab_bksp_combo[] = {KC_TAB, KC_BSPC, COMBO_END};
-combo_t key_combos[] = {
-    COMBO(fkeys_sym_combo, NAV),
-    COMBO(tab_bksp_combo, GAME),
-};
-uint16_t COMBO_LEN = sizeof(key_combos) / sizeof(key_combos[0]);
+//combo_t key_combos[VIAL_COMBO_ENTRIES] = {
+//    COMBO(fkeys_sym_combo, NAV),
+//    COMBO(tab_bksp_combo, GAME),
+//};
+//uint16_t COMBO_LEN = sizeof(key_combos) / sizeof(key_combos[0]);
 // TODO: compare to tri-state layer https://docs.splitkb.com/hc/en-us/articles/360018614379-Using-tri-state-layers
 
 // clang-format off

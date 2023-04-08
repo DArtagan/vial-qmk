@@ -146,9 +146,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_SYM_NEW] = LAYOUT_via(
-      KC_GRV, KC_EXLM, KC_AT,   KC_HASH,  KC_DLR, KC_LBRC, _______, _______, _______, _______, KC_RBRC, KC_7, KC_8, KC_9, _______, KC_BSPC,
-     KC_TILD, KC_PERC, KC_AMPR, KC_ASTR, KC_MINS, KC_LPRN,                                     KC_RPRN, KC_4, KC_5, KC_6, KC_0,    KC_EQL,
-     _______, KC_BSLS, KC_PIPE, KC_CIRC, KC_UNDS, KC_LCBR, _______, _______, _______, _______, KC_RCBR, KC_1, KC_2, KC_3, KC_DOT,  KC_PLUS,
+      KC_TAB, KC_EXLM, KC_AT,   KC_HASH,  KC_DLR, KC_LBRC, _______, _______, _______, _______, KC_RBRC, KC_7, KC_8, KC_9, _______, KC_BSPC,
+      KC_GRV, KC_PERC, KC_AMPR, KC_ASTR, KC_MINS, KC_LPRN,                                     KC_RPRN, KC_4, KC_5, KC_6, KC_0,    KC_EQL,
+     KC_TILD, KC_BSLS, KC_PIPE, KC_CIRC, KC_UNDS, KC_LCBR, _______, _______, _______, _______, KC_RCBR, KC_1, KC_2, KC_3, KC_DOT,  KC_PLUS,
                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 

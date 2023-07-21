@@ -32,10 +32,11 @@ enum layers { _BASE = 0, _NAV, _SYM, _SYM_NEW, _GAME };
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
 // produces the key `tap` when tapped (i.e. pressed and released).
 
+// Note: disabled combos.  Re-enable in rules.mk if desired.
 // Holding both FKEYS and SYM keys activates the Nav layer
 // Holding both Tab and Backspace keys toggles the Game layer
 //const uint16_t PROGMEM fkeys_sym_combo[] = {FKEYS, SYM, COMBO_END};
-const uint16_t PROGMEM tab_bksp_combo[] = {KC_TAB, KC_BSPC, COMBO_END};
+//const uint16_t PROGMEM tab_bksp_combo[] = {KC_TAB, KC_BSPC, COMBO_END};
 
 // It seems like Vial doesn't support manually defined combos, only ones done in the GUI
 // Update `VIAL_COMBO_ENTRIES` in `config.h` to equal the number of combos here

@@ -15,13 +15,13 @@
  */
 #include QMK_KEYBOARD_H
 
-enum layers { _BASE = 0, _SYM_NEW, _SYM, _NAV, _GAME };
+enum layers { _BASE = 0, _NAV, _SYM, _SYM_NEW, _GAME };
 
 // Aliases for readability
 
-#define SYM MO(_SYM)
 #define NAV MO(_NAV)
-#define FKEYS TG(_SYM_NEW)
+#define SYM MO(_SYM)
+#define SYM_NEW TG(_SYM_NEW)
 #define GAME TG(_GAME)
 
 #define ESC_CTL MT(MOD_LCTL, KC_ESC)
@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |Esc/Ctrl|   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  '  "  |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  | [ {  |CapsLk|  |F-keys|  ] } |   N  |   M  | ,  < | . >  | /  ? | RShift |
+ * | LShift |   Z  |   X  |   C  |   V  |   B  | [ {  |CapsLk|  |      |  ] } |   N  |   M  | ,  < | . >  | /  ? | RShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      | LGUI | Nav  |LAlt/ |      |  |      | Space| Sym  | RCtrl|      |
  *                        |      |      |      |Enter |      |  |      |      |      |      |      |
@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_via(
      KC_TAB  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T , _______, _______,   _______, _______,  KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC,
      ESC_CTL , KC_A ,  KC_S   ,  KC_D  ,   KC_F ,   KC_G ,                                        KC_H,   KC_J ,  KC_K ,   KC_L ,KC_SCLN, KC_QUOTE,
-     KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_LBRC,KC_CAPS,      FKEYS , KC_RBRC, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
+     KC_LSFT , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , KC_LBRC,KC_CAPS,    _______, KC_RBRC, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, KC_RSFT,
                                  KC_NO , KC_LGUI,   NAV  , ALT_ENT,  KC_NO,        KC_NO, KC_SPC, SYM , KC_RCTL, KC_NO
     ),
 
@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |        |  F5  |  F6  |  F7  |  F8  |      |                              |  ←   |  ↓   |  ↑   |  →   | VolDn|  Bksp  |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |  F1  |  F2  |  F3  |  F4  |      |      |      |  |      |      |      |M Prev|M Play|M Next|VolMut|        |
+ * |        |  F1  |  F2  |  F3  |  F4  |      |      |      |  | GAME |      |      |M Prev|M Play|M Next|VolMut|        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV] = LAYOUT_via(
       _______, KC_F9 ,  KC_F10,  KC_F11,  KC_F12, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_VOLU, KC_DEL,
       _______, KC_F5 ,  KC_F6 ,  KC_F7 ,  KC_F8 , _______,                                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_VOLD, KC_BSPC,
-      _______, KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 , _______, _______, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, _______,
+      _______, KC_F1 ,  KC_F2 ,  KC_F3 ,  KC_F4 , _______, _______, _______,    GAME, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, _______,
                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -117,17 +117,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |    `   |  1   |  2   |  3   |  4   |  5   |                              |   6  |  7   |  8   |  9   |  0   |  Bksp  |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |    ~   |  !   |  @   |  #   |  $   |  %   |                              |   ^  |  &   |  *   |  (   |  )   |   =    |
- * |--------+------+------+------+------+------+-------------.  ,------+-------------+------+------+------+------+--------|
- * |    |   |   \  |  [   |  ]   |  -   |  {   | [ {  |      |  |      |  ] } |   }  |  _   |  ,   |  .   |  /   |   +    |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |      |      |      |      |
- *                        |      |      |      |      |      |  |      |      |      |      |      |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |    |   |   \  |  [   |  ]   |  -   |  {   | [ {  |      |  |SYM_NEW| ] } |   }  |  _   |  ,   |  .   |  /   |   +    |
+ * `----------------------+------+------+------+------+------|  |-------+-----+------+------+------+----------------------'
+ *                        |      |      |      |      |      |  |       |     |      |      |      |
+ *                        |      |      |      |      |      |  |       |     |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_SYM] = LAYOUT_via(
       KC_GRV ,   KC_1 ,   KC_2 ,   KC_3 ,   KC_4 ,   KC_5 , _______, _______, _______, _______, KC_6 ,   KC_7 ,   KC_8 ,   KC_9 ,   KC_0 , KC_BSPC ,
      KC_TILD , KC_EXLM,  KC_AT , KC_HASH,  KC_DLR, KC_PERC,                                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_EQL,
-     KC_PIPE , KC_BSLS, KC_LBRC, KC_RBRC, KC_MINS, KC_LCBR, KC_LBRC, _______, _______, KC_RBRC, KC_RCBR, KC_UNDS, KC_COMM,  KC_DOT, KC_SLSH, KC_PLUS,
+     KC_PIPE , KC_BSLS, KC_LBRC, KC_RBRC, KC_MINS, KC_LCBR, KC_LBRC, _______, SYM_NEW, KC_RBRC, KC_RCBR, KC_UNDS, KC_COMM,  KC_DOT, KC_SLSH, KC_PLUS,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -135,43 +135,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * NEW Sym Layer: Numbers and symbols
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |   Tab  |  !   |  @   |  #   |  $   |  [   |                              |   ]  |  7   |  8   |  9   |      |  Bksp  |
+ * |   Tab  |  !   |  @   |  #   |  $   |  [   |                              |   ]  |  7   |  8   |  9   |  0   |  Bksp  |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |    `   |  %   |  &   |  *   |  -   |  (   |                              |   )  |  4   |  5   |  6   |  0   |   =    |
- * |--------+------+------+------+------+------+-------------.  ,------+-------------+------+------+------+------+--------|
- * |    ~   |  \   |  |   |  ^   |  _   |  {   |      |      |  |      |      |   }  |  1   |  2   |  3   |  .   |   +    |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |      |      |      |      |
- *                        |      |      |      |      |      |  |      |      |      |      |      |
+ * |    `   |  %   |  &   |  *   |  -   |  (   |                              |   )  |  4   |  5   |  6   |  .   |   =    |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |    ~   |  \   |  |   |  ^   |  _   |  {   |      |      |  |SYM_NEW|     |   }  |  1   |  2   |  3   |  /   |   +    |
+ * `----------------------+------+------+------+------+------|  |-------+-----+------+------+------+----------------------'
+ *                        |      |      |      |      |      |  |       |     |      |      |      |
+ *                        |      |      |      |      |      |  |       |     |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_SYM_NEW] = LAYOUT_via(
-      KC_TAB, KC_EXLM, KC_AT,   KC_HASH,  KC_DLR, KC_LBRC, _______, _______, _______, _______, KC_RBRC, KC_7, KC_8, KC_9, _______, KC_BSPC,
-      KC_GRV, KC_PERC, KC_AMPR, KC_ASTR, KC_MINS, KC_LPRN,                                     KC_RPRN, KC_4, KC_5, KC_6, KC_0,    KC_EQL,
-     KC_TILD, KC_BSLS, KC_PIPE, KC_CIRC, KC_UNDS, KC_LCBR, _______, _______, _______, _______, KC_RCBR, KC_1, KC_2, KC_3, KC_DOT,  KC_PLUS,
+      KC_TAB, KC_EXLM, KC_AT,   KC_HASH,  KC_DLR, KC_LBRC, _______, _______, _______, _______, KC_RBRC, KC_7, KC_8, KC_9, KC_0, KC_BSPC,
+      KC_GRV, KC_PERC, KC_AMPR, KC_ASTR, KC_MINS, KC_LPRN,                                     KC_RPRN, KC_4, KC_5, KC_6, KC_DOT,    KC_EQL,
+     KC_TILD, KC_BSLS, KC_PIPE, KC_CIRC, KC_UNDS, KC_LCBR, _______, _______, SYM_NEW, _______, KC_RCBR, KC_1, KC_2, KC_3, KC_SLSH,  KC_PLUS,
                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
 
 /*
- * GAME Layer: Default layer settings, RGB
+ * GAME Layer: Optimized for hand position while playing WASD games
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  Tab   |  Q   |      |  W   |  E   |  R   |                              |      |  7   |  8   |  9   |      | Bksp   |
+ * |  Tab   |      |  Q   |  W   |  E   |  R   |                              |  T   |  7   |  8   |  9   |  0   | Bksp   |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |  Esc   |LShift|  A   |  S   |  D   |  F   |                              | TOG  |  4   |  5   |  6   |  0   |        |
+ * |  Esc   |LShift|  A   |  S   |  D   |  F   |                              |  G   |  4   |  5   |  6   |      |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |      |      |  M   |      |      |  |      |      |      |  1   |  2   |  3   |      |        |
+ * | LShift |LCtrl |  Z   |  X   |  C   |  V   | M    |      |  | GAME |      |  B   |  1   |  2   |  3   |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      | LAlt |LCtrl |Space |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_GAME] = LAYOUT_via(
-      KC_TAB,  KC_Q,    _______, KC_W,    KC_E,    KC_R,    _______, _______, _______, _______, _______, KC_7,    KC_8,   KC_9, _______, KC_BSPC,
-      KC_ESC,  KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,                                        _______, KC_4,    KC_5,   KC_6,    KC_0, _______,
-      _______, _______, _______, _______, _______, KC_M,    _______, _______, _______, _______, _______, KC_1,    KC_2,   KC_3,  KC_DOT, _______,
-                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+      KC_TAB,  _______, KC_Q,    KC_W,    KC_E,    KC_R, _______, _______, _______, _______,    KC_T,    KC_7,    KC_8,   KC_9,    KC_0, KC_BSPC,
+      KC_ESC,  KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,                                        KC_G,    KC_4,    KC_5,   KC_6, _______, _______,
+      KC_LSFT, KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_M, _______,    GAME, _______,    KC_B,    KC_1,    KC_2,   KC_3, _______, _______,
+                              _______, KC_LALT, KC_LCTL,  KC_SPC, _______, _______, _______, _______, _______, _______
     ),
 };
 // clang-format on
@@ -206,18 +206,39 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #endif
 
 #ifdef RGBLIGHT_ENABLE
+//const rgblight_segment_t PROGMEM rgb_base_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+//    {1, 4, HSV_GREEN},       // Light 4 LEDs, starting with LED 6
+//    {6, 10, HSV_GREEN}       // Light 4 LEDs, starting with LED 12
+//);
+//
+//const rgblight_segment_t PROGMEM rgb_game_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+//    {1, 4, HSV_CYAN},       // Light 4 LEDs, starting with LED 6
+//    {6, 10, HSV_CYAN}       // Light 4 LEDs, starting with LED 12
+//);
+//
+//const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+//    rgb_base_layer,
+//    rgb_game_layer
+//);
+
 const rgblight_segment_t PROGMEM rgb_base_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {1, 4, HSV_GREEN},       // Light 4 LEDs, starting with LED 6
-    {6, 10, HSV_GREEN}       // Light 4 LEDs, starting with LED 12
+    {0, 10, HSV_RED},       // Light 10 LEDs, starting with LED 0
+    {10, 10, HSV_RED}
+);
+
+const rgblight_segment_t PROGMEM rgb_sym_new_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 10, HSV_CYAN},       // Light 10 LEDs, starting with LED 0
+    {10, 10, HSV_CYAN}
 );
 
 const rgblight_segment_t PROGMEM rgb_game_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {1, 4, HSV_CYAN},       // Light 4 LEDs, starting with LED 6
-    {6, 10, HSV_CYAN}       // Light 4 LEDs, starting with LED 12
+    {0, 10, HSV_GREEN},       // Light 10 LEDs, starting with LED 0
+    {10, 10, HSV_GREEN}
 );
 
 const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     rgb_base_layer,
+    rgb_sym_new_layer,
     rgb_game_layer
 );
 
@@ -225,18 +246,19 @@ void keyboard_post_init_user(void) {
     rgblight_layers = rgb_layers;
 }
 
-bool led_update_user(led_t led_state) {
-    rgblight_set_layer_state(1, led_state.caps_lock);
-    return true;
-}
-
-//layer_state_t default_layer_state_set_user(layer_state_t state) {
-//    rgblight_set_layer_state(0, layer_state_cmp(state, _BASE));
-//    return state;
+//bool led_update_user(led_t led_state) {
+//    rgblight_set_layer_state(1, led_state.caps_lock);
+//    return true;
 //}
 
+layer_state_t default_layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(0, layer_state_cmp(state, _BASE));
+    return state;
+}
+
 layer_state_t layer_state_set_user(layer_state_t state) {
-    rgblight_set_layer_state(1, layer_state_cmp(state, _GAME));
+    rgblight_set_layer_state(1, layer_state_cmp(state, _SYM_NEW));
+    rgblight_set_layer_state(2, layer_state_cmp(state, _GAME));
     return state;
 }
 #endif
@@ -268,7 +290,7 @@ bool oled_task_user(void) {
                 oled_write_P(PSTR("Sym\n"), false);
                 break;
             case 3:
-                oled_write_P(PSTR("Function\n"), false);
+                oled_write_P(PSTR("New Sym\n"), false);
                 break;
             case 4:
                 oled_write_P(PSTR("Game\n"), false);

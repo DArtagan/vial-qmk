@@ -43,6 +43,7 @@
 #    define RGBLIGHT_LIMIT_VAL 150
 #    define RGBLIGHT_LAYERS
 #    define RGBLIGHT_LAYERS_RETAIN_VAL
+#    define RGBLIGHT_SLEEP
 #endif
 
 #define USB_POLLING_INTERVAL_MS 1
